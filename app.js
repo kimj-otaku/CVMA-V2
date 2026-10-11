@@ -1429,10 +1429,10 @@
       };
     }
 
-    // Auto-show for first-time user
+    // Auto-show for first-time user (except home where Cloud Sync has first-screen priority)
     var storageKey = "cvma_tour_seen_" + pageKey;
     try {
-      if (localStorage.getItem(storageKey) !== "true") {
+      if (pageKey !== "home" && localStorage.getItem(storageKey) !== "true") {
         setTimeout(function () {
           showPageTour(pageKey, false);
         }, 500);
@@ -2181,6 +2181,12 @@
     // Sync กลับไปยัง DATA.vocabularyProgress เพื่อให้ instance runtime สอดคล้องกันทันที
     if (DATA && DATA.vocabularyProgress) {
       DATA.vocabularyProgress[vocabId] = record;
+    }
+
+    if (typeof window !== "undefined") {
+      try {
+        window.dispatchEvent(new CustomEvent("cvma:progress-updated", { detail: { vocabId: vocabId, record: record } }));
+      } catch (e) {}
     }
 
     return record;
@@ -7709,6 +7715,20 @@
     // Auto-setup Page Onboarding Tour & bind Help button
     setupPageOnboardingTour(page.id);
   }
+
+  // Re-render views when cloud data is synced or backup is imported
+  window.addEventListener("cvma:data-synced", function () {
+    try {
+      var page = document.querySelector("main.page");
+      if (!page) return;
+      if (page.id === "page-home") initHome();
+      else if (page.id === "page-chapters") initChapters();
+      else if (page.id === "page-chapter-detail") initChapterDetail();
+      else if (page.id === "page-progress") initProgress();
+    } catch (e) {
+      console.warn("Error re-rendering after cloud sync:", e);
+    }
+  });
 
   if (document.readyState === "loading") {
     document.addEventListener("DOMContentLoaded", init);

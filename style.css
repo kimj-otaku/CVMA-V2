@@ -55,17 +55,17 @@
   --text-soft: #A397AC;
 
   /* Borders & Radius */
-  --border: rgba(255, 218, 228, 0.7);
+  --border: rgba(240, 224, 232, 0.85);
   --border-subtle: #F6EBE5;
   --radius-card: 22px;
   --radius-btn: 16px;
   --radius-pill: 999px;
 
-  /* Soft Feminine Shadows */
-  --shadow-soft: 0 6px 20px -3px rgba(255, 120, 160, 0.09), 0 2px 6px rgba(0, 0, 0, 0.02);
-  --shadow-hover: 0 12px 28px -4px rgba(255, 110, 155, 0.16), 0 4px 10px rgba(0, 0, 0, 0.03);
-  --shadow-btn-primary: 0 6px 16px rgba(255, 96, 141, 0.28);
-  --shadow-btn-secondary: 0 6px 16px rgba(155, 123, 247, 0.24);
+  /* Clean Modern Soft Shadows */
+  --shadow-soft: 0 4px 16px -2px rgba(45, 35, 55, 0.05), 0 1px 3px rgba(45, 35, 55, 0.02);
+  --shadow-hover: 0 8px 24px -4px rgba(45, 35, 55, 0.09), 0 2px 6px rgba(45, 35, 55, 0.03);
+  --shadow-btn-primary: 0 4px 14px rgba(255, 96, 141, 0.24);
+  --shadow-btn-secondary: 0 4px 14px rgba(155, 123, 247, 0.2);
 
   --space-1: 4px;
   --space-2: 8px;
@@ -99,59 +99,60 @@ body {
 /* ===== Greeting & Cute Welcoming Header ===== */
 .greeting {
   text-align: center;
-  margin-bottom: var(--space-5);
+  margin-bottom: var(--space-4);
   position: relative;
 }
 
 .greeting-badge {
   display: inline-flex;
   align-items: center;
-  gap: 6px;
-  background: #FFEBF2;
+  gap: 5px;
+  background: #FFF0F4;
   color: #E64979;
-  padding: 5px 14px;
+  padding: 4px 12px;
   border-radius: 999px;
-  font-size: 13px;
+  font-size: 12px;
   font-weight: 700;
-  margin-bottom: 8px;
-  border: 1px solid rgba(255, 182, 193, 0.55);
-  box-shadow: 0 2px 8px rgba(255, 105, 140, 0.12);
+  border: 1px solid rgba(255, 182, 193, 0.45);
+  box-shadow: 0 1px 4px rgba(255, 105, 140, 0.08);
   letter-spacing: 0.2px;
 }
 
 .greeting h1 {
-  font-size: 28px;
+  font-size: 26px;
   font-weight: 800;
-  margin: 0 0 var(--space-1);
+  margin: 4px 0 4px;
   color: var(--text-dark);
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 8px;
+  letter-spacing: -0.02em;
 }
 
 .greeting p {
   color: var(--text-muted);
   margin: 0;
-  font-size: 15px;
+  font-size: 14px;
   font-weight: 500;
+  line-height: 1.45;
 }
 
-/* ===== Card Styling (Stationery Pillowy Look) ===== */
+/* ===== Card Styling (Clean Stationery Look) ===== */
 .card {
   background: var(--surface);
   border-radius: var(--radius-card);
   border: 1px solid var(--border);
   box-shadow: var(--shadow-soft);
-  padding: var(--space-5) var(--space-4);
-  margin-bottom: var(--space-4);
+  padding: 20px 18px;
+  margin-bottom: 14px;
   position: relative;
-  transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.2s ease, border-color 0.2s ease;
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.2s ease, border-color 0.2s ease;
 }
 
 .card:hover {
   box-shadow: var(--shadow-hover);
-  border-color: rgba(255, 182, 200, 0.85);
+  border-color: rgba(255, 182, 200, 0.65);
 }
 
 .card-label {
@@ -2998,11 +2999,11 @@ select.form-input {
    Feminine Pastel Stationery Aesthetic
    ============================================================ */
 .card-daily-goal {
-  background: linear-gradient(135deg, #FFF9FA 0%, #FAF5FF 55%, #FFFDF7 100%);
-  border: 1.5px solid rgba(255, 205, 222, 0.9);
-  border-radius: 24px;
-  box-shadow: 0 8px 24px rgba(255, 117, 151, 0.1), 0 2px 8px rgba(155, 123, 247, 0.08);
-  padding: var(--space-4) var(--space-4);
+  background: linear-gradient(135deg, #FFFDFE 0%, #FAF8FF 100%);
+  border: 1px solid rgba(255, 215, 230, 0.75);
+  border-radius: 22px;
+  box-shadow: 0 4px 16px -2px rgba(45, 35, 55, 0.05);
+  padding: 18px 18px;
   position: relative;
   overflow: hidden;
 }
@@ -3426,8 +3427,10 @@ select.form-input {
   flex-direction: column;
   gap: var(--space-3);
   background: var(--surface);
-  border: 1.5px solid rgba(255, 218, 228, 0.7);
+  border: 1px solid rgba(240, 224, 232, 0.85);
   box-shadow: var(--shadow-soft);
+  border-radius: 22px;
+  padding: 18px 18px;
   position: relative;
   overflow: visible;
 }
@@ -4605,12 +4608,22 @@ select.form-input {
 /* ============================================================
    Greeting Top Bar & Page Help Guide Button
    ============================================================ */
+/* ============================================================
+   Greeting Top Bar & Page Actions (Cloud Sync + Help Guide)
+   ============================================================ */
 .greeting-top-bar {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 12px;
-  margin-bottom: var(--space-2);
+  gap: 10px;
+  margin-bottom: var(--space-3);
+}
+
+.greeting-actions {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
 }
 
 .btn-help-guide {
@@ -4626,7 +4639,7 @@ select.form-input {
   border-radius: var(--radius-pill);
   cursor: pointer;
   transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
-  box-shadow: 0 2px 6px rgba(123, 78, 201, 0.08);
+  box-shadow: 0 1px 4px rgba(123, 78, 201, 0.08);
   white-space: nowrap;
   flex-shrink: 0;
   outline: none;
@@ -4635,10 +4648,107 @@ select.form-input {
   background: #EAE0FF;
   border-color: #CDB9F8;
   transform: translateY(-1px);
-  box-shadow: 0 4px 12px rgba(123, 78, 201, 0.16);
+  box-shadow: 0 4px 10px rgba(123, 78, 201, 0.14);
 }
 .btn-help-guide:active {
   transform: translateY(0);
+}
+
+/* ============================================================
+   Card Cloud Banner (Clean Cross-Device Sync Status)
+   ============================================================ */
+.card-cloud-banner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  background: linear-gradient(135deg, #FAF8FE 0%, #FFF8FA 100%);
+  border: 1px solid rgba(220, 210, 245, 0.75);
+  border-radius: 20px;
+  padding: 13px 16px;
+  margin-bottom: 14px;
+  box-shadow: 0 3px 12px rgba(110, 80, 200, 0.04);
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.card-cloud-banner:hover {
+  border-color: rgba(196, 181, 253, 0.9);
+  box-shadow: 0 6px 18px rgba(110, 80, 200, 0.08);
+  transform: translateY(-1px);
+}
+.cloud-banner-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 0;
+  flex: 1;
+}
+.cloud-banner-icon-wrap {
+  width: 40px;
+  height: 40px;
+  border-radius: 13px;
+  background: linear-gradient(135deg, #EDE9FE 0%, #F5EEFF 100%);
+  border: 1px solid #DDD6FE;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 19px;
+  flex-shrink: 0;
+  position: relative;
+}
+.cloud-banner-dot {
+  position: absolute;
+  bottom: -2px;
+  right: -2px;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: #F59E0B;
+  border: 2px solid #FFFFFF;
+}
+.cloud-banner-dot.is-online {
+  background: #10B981;
+  box-shadow: 0 0 6px rgba(16, 185, 129, 0.6);
+}
+.cloud-banner-info {
+  min-width: 0;
+  flex: 1;
+}
+.cloud-banner-label {
+  font-size: 13.5px;
+  font-weight: 800;
+  color: var(--text-dark);
+  line-height: 1.25;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.cloud-banner-sub {
+  font-size: 12px;
+  color: var(--text-muted);
+  line-height: 1.35;
+  margin-top: 2px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.cloud-banner-btn {
+  padding: 6px 14px;
+  font-size: 12.5px;
+  font-weight: 700;
+  color: #6D28D9;
+  background: #F3EEFF;
+  border: 1px solid #DDD6FE;
+  border-radius: 999px;
+  cursor: pointer;
+  white-space: nowrap;
+  flex-shrink: 0;
+  transition: all 0.15s ease;
+}
+.cloud-banner-btn:hover {
+  background: #EDE5FF;
+  border-color: #C4B5FD;
+  transform: translateY(-1px);
 }
 
 .btn-help-header {

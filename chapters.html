@@ -13,7 +13,12 @@
     <header class="greeting">
       <div class="greeting-top-bar">
         <div class="greeting-badge">📚 คลังบทเรียน</div>
-        <button class="btn-help-guide" id="btnPageHelp" type="button" aria-label="แนะนำการใช้งานหน้านี้" title="แนะนำการใช้งานหน้านี้">💡 วิธีใช้งาน</button>
+        <div class="greeting-actions">
+          <button class="btn-cloud-sync" id="btnCloudSync" type="button" aria-label="ซิงก์ข้อมูลคลาวด์และสำรองไฟล์">
+            <span class="sync-status-dot"></span> <span class="sync-btn-text">☁️ ซิงก์คลาวด์</span>
+          </button>
+          <button class="btn-help-guide" id="btnPageHelp" type="button" aria-label="แนะนำการใช้งานหน้านี้" title="แนะนำการใช้งานหน้านี้">💡 วิธีใช้งาน</button>
+        </div>
       </div>
       <h1>บทเรียนทั้งหมด ✨</h1>
       <p>เลือกบทเรียนที่ต้องการเพื่อฝึกจำและทบทวน</p>
@@ -108,5 +113,6 @@
 
   <script src="data/vocab-data.js"></script>
   <script src="app.js"></script>
+  <script type="module" src="firebase-sync.js"></script>
 </body>
 </html>

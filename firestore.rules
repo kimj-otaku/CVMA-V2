@@ -1,0 +1,62 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // Default deny catch-all
+    match /{document=**} {
+      allow read, write: if false;
+    }
+
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    function isOwner(userId) {
+      return isSignedIn() && request.auth.uid == userId;
+    }
+
+    function isValidId(id) {
+      return id is string && id.size() > 0 && id.size() <= 128 && id.matches('^[a-zA-Z0-9_\\-]+$');
+    }
+
+    // User profile and top-level user data
+    match /users/{userId} {
+      allow read: if isOwner(userId);
+      allow create: if isOwner(userId) && request.resource.data.uid == userId;
+      allow update: if isOwner(userId) && request.resource.data.uid == userId;
+      allow delete: if isOwner(userId);
+
+      // User's custom created chapters
+      match /custom_chapters/{chapterId} {
+        allow read: if isOwner(userId);
+        allow create: if isOwner(userId) && isValidId(chapterId) && request.resource.data.userId == userId;
+        allow update: if isOwner(userId) && isValidId(chapterId) && request.resource.data.userId == userId;
+        allow delete: if isOwner(userId) && isValidId(chapterId);
+      }
+
+      // User's custom vocabularies
+      match /custom_vocabularies/{vocabId} {
+        allow read: if isOwner(userId);
+        allow create: if isOwner(userId) && isValidId(vocabId) && request.resource.data.userId == userId;
+        allow update: if isOwner(userId) && isValidId(vocabId) && request.resource.data.userId == userId;
+        allow delete: if isOwner(userId) && isValidId(vocabId);
+      }
+
+      // User's vocabulary memory progress (SRS)
+      match /vocab_progress/{vocabId} {
+        allow read: if isOwner(userId);
+        allow create: if isOwner(userId) && isValidId(vocabId) && request.resource.data.userId == userId;
+        allow update: if isOwner(userId) && isValidId(vocabId) && request.resource.data.userId == userId;
+        allow delete: if isOwner(userId) && isValidId(vocabId);
+      }
+
+      // User's daily study history logs
+      match /study_history/{dateKey} {
+        allow read: if isOwner(userId);
+        allow create: if isOwner(userId) && isValidId(dateKey) && request.resource.data.userId == userId;
+        allow update: if isOwner(userId) && isValidId(dateKey) && request.resource.data.userId == userId;
+        allow delete: if isOwner(userId) && isValidId(dateKey);
+      }
+    }
+  }
+}

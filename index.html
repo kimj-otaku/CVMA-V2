@@ -16,11 +16,33 @@
     <header class="greeting">
       <div class="greeting-top-bar">
         <div class="greeting-badge">🌸 เก่งภาษาจีนวันละนิด</div>
-        <button class="btn-help-guide" id="btnPageHelp" type="button" aria-label="แนะนำการใช้งานหน้านี้" title="แนะนำการใช้งานหน้านี้">💡 วิธีใช้งาน</button>
+        <div class="greeting-actions" id="greetingActions">
+          <button class="btn-cloud-sync" id="btnCloudSync" type="button" aria-label="ซิงก์ข้อมูลคลาวด์และสำรองไฟล์">
+            <span class="sync-status-dot"></span> <span class="sync-btn-text">☁️ ซิงก์คลาวด์</span>
+          </button>
+          <button class="btn-help-guide" id="btnPageHelp" type="button" aria-label="แนะนำการใช้งานหน้านี้" title="แนะนำการใช้งานหน้านี้">💡 วิธีใช้งาน</button>
+        </div>
       </div>
       <h1>你好! มาฝึกกันนะ ✨</h1>
       <p>สะสมคำศัพท์ทีละก้าว จำแม่นด้วยระบบทบทวนอัจฉริยะ</p>
     </header>
+
+    <!-- ☁️ Cloud Sync Status & Cross-Device Banner -->
+    <section class="card card-cloud-banner" id="homeCloudSyncBanner">
+      <div class="cloud-banner-left">
+        <div class="cloud-banner-icon-wrap">
+          <span class="cloud-banner-icon">☁️</span>
+          <span class="cloud-banner-dot" id="homeCloudStatusDot"></span>
+        </div>
+        <div class="cloud-banner-info">
+          <div class="cloud-banner-label" id="homeCloudStatusLabel">ระบบซิงก์คลาวด์ข้ามอุปกรณ์</div>
+          <div class="cloud-banner-sub" id="homeCloudStatusSub">เชื่อมต่อ iPhone, iPad หรือคอมพิวเตอร์ ข้อมูลจะตรงกันเสมอ (ฟรี 100%)</div>
+        </div>
+      </div>
+      <button class="cloud-banner-btn" id="homeOpenSyncBannerBtn" type="button">
+        ☁️ ตั้งค่าซิงก์
+      </button>
+    </section>
 
     <!-- 🔔 Daily Goal Reminder Alert Banner (Shown when goal is not met at/after reminder time) -->
     <div class="reminder-alert-banner" id="homeReminderAlertBanner" style="display: none;">
@@ -299,5 +321,6 @@
   <script>window.d3 || document.write('<script src="node_modules/d3/dist/d3.min.js"><\/script>')</script>
   <script src="data/vocab-data.js"></script>
   <script src="app.js"></script>
+  <script type="module" src="firebase-sync.js"></script>
 </body>
 </html>

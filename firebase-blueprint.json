@@ -1,0 +1,106 @@
+{
+  "entities": {
+    "UserProfile": {
+      "title": "User Profile",
+      "description": "Stores user profile settings and preferences",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string", "maxLength": 128 },
+        "email": { "type": "string", "maxLength": 256 },
+        "displayName": { "type": "string", "maxLength": 128 },
+        "dailyGoal": { "type": "number" },
+        "activeChapter": { "type": "string", "maxLength": 128 },
+        "createdAt": { "type": "string", "maxLength": 64 },
+        "updatedAt": { "type": "string", "maxLength": 64 }
+      },
+      "required": ["uid"]
+    },
+    "CustomChapter": {
+      "title": "Custom Chapter",
+      "description": "User created custom chapter",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "maxLength": 128 },
+        "userId": { "type": "string", "maxLength": 128 },
+        "title": { "type": "string", "maxLength": 150 },
+        "description": { "type": "string", "maxLength": 500 },
+        "level": { "type": "string", "maxLength": 64 },
+        "createdAt": { "type": "string", "maxLength": 64 },
+        "updatedAt": { "type": "string", "maxLength": 64 }
+      },
+      "required": ["id", "userId", "title"]
+    },
+    "CustomVocabulary": {
+      "title": "Custom Vocabulary",
+      "description": "User created custom vocabulary card",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "maxLength": 128 },
+        "userId": { "type": "string", "maxLength": 128 },
+        "chapterId": { "type": "string", "maxLength": 128 },
+        "hanzi": { "type": "string", "maxLength": 64 },
+        "pinyin": { "type": "string", "maxLength": 128 },
+        "meaning": { "type": "string", "maxLength": 500 },
+        "exampleHanzi": { "type": "string", "maxLength": 500 },
+        "exampleMeaning": { "type": "string", "maxLength": 500 },
+        "tip": { "type": "string", "maxLength": 500 },
+        "category": { "type": "string", "maxLength": 64 },
+        "createdAt": { "type": "string", "maxLength": 64 },
+        "updatedAt": { "type": "string", "maxLength": 64 }
+      },
+      "required": ["id", "userId", "hanzi", "meaning"]
+    },
+    "VocabularyProgress": {
+      "title": "Vocabulary Progress",
+      "description": "SRS spaced repetition progress for a vocabulary item",
+      "type": "object",
+      "properties": {
+        "vocabId": { "type": "string", "maxLength": 128 },
+        "userId": { "type": "string", "maxLength": 128 },
+        "status": { "type": "string", "maxLength": 32 },
+        "reviewCount": { "type": "number" },
+        "srsLevel": { "type": "number" },
+        "intervalDays": { "type": "number" },
+        "lastReviewed": { "type": "string", "maxLength": 64 },
+        "nextReview": { "type": "string", "maxLength": 64 },
+        "updatedAt": { "type": "string", "maxLength": 64 }
+      },
+      "required": ["vocabId", "userId", "status"]
+    },
+    "StudyLog": {
+      "title": "Study Log",
+      "description": "Daily study history record for streak calculation",
+      "type": "object",
+      "properties": {
+        "date": { "type": "string", "maxLength": 32 },
+        "userId": { "type": "string", "maxLength": 128 },
+        "wordsLearnedCount": { "type": "number" },
+        "active": { "type": "boolean" },
+        "updatedAt": { "type": "string", "maxLength": 64 }
+      },
+      "required": ["date", "userId"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": "UserProfile",
+      "description": "User profile and settings"
+    },
+    "/users/{userId}/custom_chapters/{chapterId}": {
+      "schema": "CustomChapter",
+      "description": "User's custom created chapters"
+    },
+    "/users/{userId}/custom_vocabularies/{vocabId}": {
+      "schema": "CustomVocabulary",
+      "description": "User's custom vocabulary items"
+    },
+    "/users/{userId}/vocab_progress/{vocabId}": {
+      "schema": "VocabularyProgress",
+      "description": "User's spaced repetition memory progress per word"
+    },
+    "/users/{userId}/study_history/{dateKey}": {
+      "schema": "StudyLog",
+      "description": "User's daily study record for streak and habit tracking"
+    }
+  }
+}

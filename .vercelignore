@@ -1,1 +1,4 @@
 server.js
+.env*
+.aistudio
+bun.lock
