@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Learn Mode — จำศัพท์จีน</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <main class="page" id="page-learn">
+
+    <header class="card-page-header">
+      <button class="icon-btn" id="learnBackBtn" aria-label="ย้อนกลับไปหน้าบทเรียน" onclick="location.href='chapters.html'">←</button>
+      <div class="card-page-title">
+        <span class="chapter-title" id="learnChapterTitle">Learn Mode</span>
+        <span class="chapter-sub" id="learnProgressSub"></span>
+      </div>
+      <button class="btn-help-guide btn-help-header" id="btnPageHelp" type="button" aria-label="แนะนำการใช้งานหน้านี้" title="แนะนำการใช้งานหน้านี้">💡 วิธีใช้</button>
+    </header>
+
+    <!-- ===== เนื้อหา Learn Mode (ซ่อนเมื่อแสดง Empty/Error State) ===== -->
+    <div id="learnBody">
+
+      <div class="learn-progress">
+        <div class="progress-bar"><div class="progress-fill" id="learnProgressFill" style="width:0%"></div></div>
+      </div>
+
+      <!-- ===== Learn Mode Card (ใช้โครงสร้าง Vocabulary Card เดิม) ===== -->
+      <section class="vocab-card" id="learnCard">
+
+        <div class="vocab-card-top">
+          <div class="vocab-card-tags">
+            <span class="tag" id="learnTag"></span>
+            <span class="status-badge" id="learnStatus"></span>
+          </div>
+          <span class="difficulty" id="learnDifficulty" aria-label="ระดับความยาก"></span>
+        </div>
+
+        <!-- ขั้นที่ 1-4: 汉字 / Pinyin / ฟังเสียง / ให้ผู้ใช้ลองนึกความหมาย -->
+        <div class="vocab-card-face vocab-card-front">
+          <div class="vocab-hanzi" id="learnHanziFront"></div>
+          <div class="vocab-pinyin" id="learnPinyinFront"></div>
+
+          <button class="learn-listen-btn" id="learnListenBtn" aria-label="ฟังเสียง" type="button">🔊 ฟังเสียง</button>
+          <div class="speech-notice is-hidden" id="learnSpeechNotice" role="status" aria-live="polite"></div>
+
+          <div class="recall-hint">🤔 ลองนึกความหมายในใจก่อนนะ</div>
+
+          <button class="btn btn-primary vocab-reveal-btn" onclick="document.getElementById('learnCard').classList.add('is-revealed')">
+            👁️ แตะเพื่อดูคำตอบ
+          </button>
+        </div>
+
+        <!-- ขั้นที่ 5-8: ความหมาย / ตัวอย่างประโยค+คำแปล / Memory Tip -->
+        <div class="vocab-card-face vocab-card-back">
+          <div class="vocab-hanzi vocab-hanzi-sm" id="learnHanziBack"></div>
+          <div class="vocab-pinyin" id="learnPinyinBack"></div>
+          <button class="learn-listen-btn" id="learnListenBtnBack" aria-label="ฟังเสียงออกเสียงภาษาจีน" type="button" style="margin: 4px auto 10px;">🔊 ฟังเสียง</button>
+          <div class="vocab-meaning" id="learnMeaning"></div>
+
+          <div class="vocab-divider"></div>
+
+          <div class="vocab-example">
+            <div style="display: flex; align-items: center; justify-content: space-between; gap: 8px;">
+              <div class="vocab-example-hanzi" id="learnExampleHanzi" style="margin-bottom: 0;"></div>
+              <button class="btn-mini-audio" id="learnExampleListenBtn" type="button" title="ฟังเสียงตัวอย่างประโยค">🔊</button>
+            </div>
+            <div class="vocab-example-th" id="learnExampleTh"></div>
+          </div>
+
+          <div class="vocab-tip">
+            💡 <span id="learnTip"></span>
+          </div>
+        </div>
+
+      </section>
+
+      <!-- ขั้นที่ 9: ปุ่ม "ยังจำไม่ได้" / "จำได้แล้ว" (แสดงเมื่อเปิดคำตอบแล้ว) -->
+      <div class="learn-actions" id="learnActions">
+        <button class="btn btn-secondary learn-btn-no" id="learnBtnNo">😵 ยังจำไม่ได้</button>
+        <button class="btn btn-primary learn-btn-yes" id="learnBtnYes">✅ จำได้แล้ว</button>
+      </div>
+
+    </div>
+
+    <!-- ===== Empty / Error State (แสดงแทน learnBody เมื่อไม่มี/ไม่พบข้อมูล) ===== -->
+    <div id="learnStateBox" class="is-hidden"></div>
+
+  </main>
+
+  <script src="data/vocab-data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

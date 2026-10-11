@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>แบบทดสอบ Active Recall — จำศัพท์จีน</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <main class="page" id="page-quiz">
+
+    <!-- Header -->
+    <header class="card-page-header">
+      <button class="icon-btn" id="quizBackBtn" aria-label="ย้อนกลับ" type="button">←</button>
+      <div class="card-page-title">
+        <span class="chapter-title" id="quizTitle">🎯 แบบทดสอบ Active Recall</span>
+        <span class="chapter-sub" id="quizSub">เตรียมโหลดคำถาม...</span>
+      </div>
+      <button class="btn-help-guide btn-help-header" id="btnPageHelp" type="button" aria-label="แนะนำการใช้งานหน้านี้" title="แนะนำการใช้งานหน้านี้">💡 วิธีใช้</button>
+    </header>
+
+    <!-- เนื้อหาหลักของ Quiz (ซ่อนเมื่อแสดง Result หรือ State Box) -->
+    <div id="quizBody">
+
+      <!-- แถบเลือกโหมดคำถาม (Filter Chips) -->
+      <div class="quiz-mode-bar" id="quizModeBar">
+        <button class="quiz-chip is-active" data-mode="mixed" type="button">🔀 คำถามผสม</button>
+        <button class="quiz-chip" data-mode="speaking" type="button">🎙️ พูดตอบ (Speak)</button>
+        <button class="quiz-chip" data-mode="meaning" type="button">📝 เลือกความหมาย</button>
+        <button class="quiz-chip" data-mode="listening" type="button">🔊 ฟังเสียง</button>
+        <button class="quiz-chip" data-mode="spelling" type="button">✍️ สะกด Pinyin</button>
+      </div>
+
+      <!-- แถบแสดงความคืบหน้าและคะแนน -->
+      <div class="quiz-meta-row">
+        <div class="quiz-progress-wrap">
+          <div class="progress-bar"><div class="progress-fill" id="quizProgressFill" style="width: 0%"></div></div>
+        </div>
+        <div class="quiz-score-indicator" id="quizScoreIndicator">
+          <span class="quiz-score-badge" id="quizScoreBadge">⭐ 0 / 0</span>
+          <span class="quiz-streak-badge is-hidden" id="quizStreakBadge">🔥 2 ข้อติด!</span>
+        </div>
+      </div>
+
+      <!-- คอนเทนเนอร์แสดงการ์ดคำถามแบบไดนามิก -->
+      <div id="quizQuestionContainer"></div>
+
+    </div>
+
+    <!-- ===== หน้าสรุปผลคะแนนเมื่อทำแบบทดสอบจบ (Quiz Completion Screen) ===== -->
+    <div id="quizResultBox" class="is-hidden"></div>
+
+    <!-- ===== Empty / Error State (เมื่อไม่มีคำศัพท์หรือบทเรียนผิดพลาด) ===== -->
+    <div id="quizStateBox" class="is-hidden"></div>
+
+  </main>
+
+  <nav class="bottom-nav">
+    <button class="nav-item" onclick="location.href='index.html'">🏠<span>หน้าแรก</span></button>
+    <button class="nav-item" onclick="location.href='chapters.html'">📚<span>บทเรียน</span></button>
+    <button class="nav-item" onclick="location.href='quick-review.html'">🧠<span>ทบทวน</span></button>
+    <button class="nav-item" onclick="location.href='progress.html'">📊<span>ความคืบหน้า</span></button>
+  </nav>
+
+  <script src="data/vocab-data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

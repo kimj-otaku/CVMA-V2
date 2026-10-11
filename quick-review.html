@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ทบทวนวันนี้ — จำศัพท์จีน</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <main class="page" id="page-quick-review">
+
+    <header class="card-page-header">
+      <button class="icon-btn" aria-label="ย้อนกลับไปหน้า Home" onclick="location.href='index.html'">←</button>
+      <div class="card-page-title">
+        <span class="chapter-title">🧠 ทบทวนวันนี้</span>
+        <span class="chapter-sub" id="reviewProgressSub">คำที่ 1 / 1</span>
+      </div>
+      <button class="btn-help-guide btn-help-header" id="btnPageHelp" type="button" aria-label="แนะนำการใช้งานหน้านี้" title="แนะนำการใช้งานหน้านี้">💡 วิธีใช้</button>
+    </header>
+
+    <!-- ===== เนื้อหา Quick Review (ซ่อนเมื่อแสดง Empty/Error State) ===== -->
+    <div id="reviewBody">
+
+      <div class="learn-progress">
+        <div class="progress-bar"><div class="progress-fill" id="reviewProgressFill" style="width:0%"></div></div>
+      </div>
+
+      <!-- ===== การ์ดทบทวน (ใช้โครงสร้างเดียวกับ Learn Mode) — เติมข้อมูลจาก VOCAB_DATA ผ่าน app.js ===== -->
+      <section class="vocab-card" id="reviewCard">
+
+        <div class="vocab-card-top">
+          <div class="vocab-card-tags">
+            <span class="tag" id="reviewTag"></span>
+            <span class="status-badge" id="reviewStatus"></span>
+          </div>
+          <span class="difficulty" id="reviewDifficulty" aria-label="ระดับความยาก"></span>
+        </div>
+
+        <!-- ผู้ใช้ลองนึกความหมายก่อน แล้วค่อยเปิดคำตอบ -->
+        <div class="vocab-card-face vocab-card-front">
+          <div class="vocab-hanzi" id="reviewHanziFront"></div>
+          <div class="vocab-pinyin" id="reviewPinyinFront"></div>
+
+          <button class="learn-listen-btn" id="reviewListenBtn" aria-label="ฟังเสียง" type="button">🔊 ฟังเสียง</button>
+          <div class="speech-notice is-hidden" id="reviewSpeechNotice" role="status" aria-live="polite"></div>
+
+          <div class="recall-hint">🤔 ลองนึกความหมายในใจก่อนนะ</div>
+
+          <button class="btn btn-primary vocab-reveal-btn" onclick="document.getElementById('reviewCard').classList.add('is-revealed')">
+            👁️ แตะเพื่อดูคำตอบ
+          </button>
+        </div>
+
+        <div class="vocab-card-face vocab-card-back">
+          <div class="vocab-hanzi vocab-hanzi-sm" id="reviewHanziBack"></div>
+          <div class="vocab-pinyin" id="reviewPinyinBack"></div>
+          <button class="learn-listen-btn" id="reviewListenBtnBack" aria-label="ฟังเสียงออกเสียงภาษาจีน" type="button" style="margin: 4px auto 10px;">🔊 ฟังเสียง</button>
+          <div class="vocab-meaning" id="reviewMeaning"></div>
+
+          <div class="vocab-divider"></div>
+
+          <div class="vocab-example">
+            <div style="display: flex; align-items: center; justify-content: space-between; gap: 8px;">
+              <div class="vocab-example-hanzi" id="reviewExampleHanzi" style="margin-bottom: 0;"></div>
+              <button class="btn-mini-audio" id="reviewExampleListenBtn" type="button" title="ฟังเสียงตัวอย่างประโยค">🔊</button>
+            </div>
+            <div class="vocab-example-th" id="reviewExampleTh"></div>
+          </div>
+
+          <div class="vocab-tip">
+            💡 <span id="reviewTip"></span>
+          </div>
+        </div>
+
+      </section>
+
+      <!-- ===== Spaced Repetition — 5 ระดับ (TASK 6.2 แสดงเมื่อเปิดคำตอบแล้ว) ===== -->
+      <div class="srs-rating" id="reviewSrsRating">
+        <div class="srs-label">คุณจำคำนี้ได้แค่ไหน?</div>
+        <div class="srs-buttons">
+          <button class="srs-btn srs-1" data-rating="1" type="button"><span class="srs-emoji">😵</span>ลืมแล้ว</button>
+          <button class="srs-btn srs-2" data-rating="2" type="button"><span class="srs-emoji">😕</span>ยาก</button>
+          <button class="srs-btn srs-3" data-rating="3" type="button"><span class="srs-emoji">🙂</span>ปานกลาง</button>
+          <button class="srs-btn srs-4" data-rating="4" type="button"><span class="srs-emoji">😄</span>ง่าย</button>
+          <button class="srs-btn srs-5" data-rating="5" type="button"><span class="srs-emoji">🤩</span>จำแม่น</button>
+        </div>
+      </div>
+
+      <!-- ปุ่มตอบแบบ 2 ตัวเลือกเดิม (ซ่อนไว้เพื่อความเข้ากันได้) -->
+      <div class="learn-actions is-hidden" id="reviewActions">
+        <button class="btn btn-secondary learn-btn-no" id="reviewBtnNo">😵 ยังจำไม่ได้</button>
+        <button class="btn btn-primary learn-btn-yes" id="reviewBtnYes">✅ จำได้แล้ว</button>
+      </div>
+
+      <!-- ปุ่มย้อนกลับ/ไปคำถัดไป -->
+      <div class="review-nav">
+        <button class="btn btn-secondary" id="reviewPrevBtn">← คำก่อนหน้า</button>
+        <button class="btn btn-secondary" id="reviewNextBtn">คำถัดไป →</button>
+      </div>
+
+    </div>
+
+    <!-- ===== Empty / Error State (แสดงแทน reviewBody เมื่อไม่มี/ไม่พบข้อมูล) ===== -->
+    <div id="reviewStateBox" class="is-hidden"></div>
+
+  </main>
+
+  <script src="data/vocab-data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

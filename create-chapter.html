@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>สร้างบทใหม่ — จำศัพท์จีน</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <main class="page" id="page-create-chapter">
+
+    <header class="card-page-header">
+      <button class="icon-btn" id="createBackBtn" aria-label="ย้อนกลับ" onclick="location.href='chapters.html'">←</button>
+      <div class="card-page-title">
+        <span class="chapter-title" id="pageHeaderTitle">✏️ สร้างบทใหม่</span>
+        <span class="chapter-sub" id="pageHeaderSub">เพิ่มบทเรียนคำศัพท์ของคุณ</span>
+      </div>
+      <button class="btn-help-guide btn-help-header" id="btnPageHelp" type="button" aria-label="แนะนำการใช้งานหน้านี้" title="แนะนำการใช้งานหน้านี้">💡 วิธีใช้</button>
+    </header>
+
+    <!-- ข้อความแจ้งเตือนข้อผิดพลาด (Validation Alert) -->
+    <div id="formErrorAlert" class="form-error-alert" role="alert" style="display:none;"></div>
+
+    <!-- ===== ข้อมูลบท ===== -->
+    <section class="card">
+      <div class="card-label">ข้อมูลบท</div>
+
+      <div class="form-field">
+        <label class="form-label" for="chapterName">ชื่อบท <span class="required-star">*</span></label>
+        <input class="form-input" id="chapterName" type="text" placeholder="เช่น HSK2 บทที่ 5 — ร้านอาหาร" autocomplete="off" required>
+      </div>
+
+      <div class="form-field">
+        <label class="form-label" for="chapterDesc">คำอธิบายสั้น ๆ (ไม่บังคับ)</label>
+        <textarea class="form-input" id="chapterDesc" rows="2" placeholder="เช่น คำศัพท์เกี่ยวกับการสั่งอาหารและเครื่องดื่ม" autocomplete="off"></textarea>
+      </div>
+    </section>
+
+    <!-- ===== นำเข้าแบบข้อความ (Quick Text Import - TASK 8.2) ===== -->
+    <section class="card quick-import-card">
+      <div class="quick-import-head" id="quickImportToggleBtn" role="button" tabindex="0">
+        <div class="quick-import-title-group">
+          <div class="card-label">📋 นำเข้าแบบข้อความชุด (Quick Import)</div>
+          <div class="form-hint">แตะเพื่อวางคำศัพท์หลายคำพร้อมกัน (คั่นด้วย จุลภาค , หรือ Tab หรือ /)</div>
+        </div>
+        <span class="quick-import-icon" id="quickImportToggleIcon">▼</span>
+      </div>
+
+      <div id="quickImportBody" class="quick-import-body" style="display:none;">
+        <div class="form-field" style="margin-top: var(--space-3);">
+          <label class="form-label" for="quickImportText">วางข้อความที่นี่ (1 คำต่อ 1 บรรทัด)</label>
+          <textarea class="form-input quick-import-textarea" id="quickImportText" rows="4" placeholder="เช่น:&#10;你好, nǐ hǎo, สวัสดี&#10;谢谢, xièxie, ขอบคุณ&#10;再见, zàijiàn, ลาก่อน"></textarea>
+          <div class="form-hint" style="margin-top: 4px;">รูปแบบ: 汉字, pinyin, คำแปล หรือคัดลอกจาก Excel / Google Sheets ได้โดยตรง</div>
+        </div>
+        <div class="quick-import-actions">
+          <button class="btn btn-secondary" id="doQuickImportBtn" type="button" style="width:100%; min-height:44px;">⚡ นำเข้าคำศัพท์ลงในฟอร์ม</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== นำเข้าจากรูปภาพ (OCR Scanner - TASK 8.4) ===== -->
+    <section class="card import-card">
+      <div class="import-card-text">
+        <div class="card-label">📷 นำเข้าจากรูปภาพ (OCR Assistant)</div>
+        <div class="form-hint">ถ่ายรูปหน้าหนังสือเรียนหรือเลือกภาพคำศัพท์เพื่อสแกนเข้าฟอร์มอัตโนมัติ</div>
+      </div>
+      <button class="btn btn-secondary import-btn" id="openOcrModalBtn" type="button">📷 ถ่ายรูป / นำเข้าภาพ</button>
+    </section>
+
+    <!-- ===== เพิ่มคำศัพท์เอง ===== -->
+    <div class="section-head">
+      <span class="card-label">เพิ่มคำศัพท์ในบทนี้</span>
+      <span class="form-hint" id="vocabCount">1 คำ</span>
+    </div>
+
+    <div id="vocabList">
+      <section class="card vocab-form" data-vocab-index="0">
+        <div class="vocab-form-head">
+          <span class="tag">คำที่ 1</span>
+          <button class="btn-remove-vocab" type="button" style="display:none;" title="ลบคำนี้">🗑️ ลบคำนี้</button>
+        </div>
+
+        <div class="form-field">
+          <label class="form-label" for="hanzi_0">汉字 (ตัวอักษรจีน) <span class="required-star">*</span></label>
+          <div class="hanzi-input-group">
+            <input class="form-input form-input-hanzi input-hanzi" id="hanzi_0" type="text" placeholder="เช่น 老师 หรือ 苹果" autocomplete="off" required>
+            <button class="btn-preview-speech" type="button" title="ทดสอบออกเสียงภาษาจีน">🔊 ฟังเสียง</button>
+          </div>
+        </div>
+
+        <div class="form-field">
+          <label class="form-label" for="pinyin_0">Pinyin (พินอิน)</label>
+          <input class="form-input input-pinyin" id="pinyin_0" type="text" placeholder="เช่น lǎoshī หรือ píngguǒ" autocomplete="off">
+        </div>
+
+        <div class="form-field">
+          <label class="form-label" for="meaning_0">ความหมายภาษาไทย <span class="required-star">*</span></label>
+          <input class="form-input input-meaning" id="meaning_0" type="text" placeholder="เช่น ครู หรือ แอปเปิ้ล" autocomplete="off" required>
+        </div>
+
+        <div class="form-field">
+          <label class="form-label" for="example_0">ตัวอย่างประโยคภาษาจีน (ไม่บังคับ)</label>
+          <input class="form-input input-example" id="example_0" type="text" placeholder="เช่น 老师教我们中文。" autocomplete="off">
+        </div>
+
+        <div class="form-field">
+          <label class="form-label" for="example_th_0">คำแปลตัวอย่างประโยค (ไม่บังคับ)</label>
+          <input class="form-input input-example-th" id="example_th_0" type="text" placeholder="เช่น ครูสอนภาษาจีนให้เรา" autocomplete="off">
+        </div>
+
+        <div class="form-field">
+          <label class="form-label" for="memory_0">💡 Memory Tip เทคนิคช่วยจำ (ไม่บังคับ)</label>
+          <input class="form-input input-memory-tip" id="memory_0" type="text" placeholder="เช่น 老 (แก่/อาวุโส) + 师 (ผู้รู้) → ครู" autocomplete="off">
+        </div>
+
+        <div class="vocab-extra-row">
+          <div class="form-field">
+            <label class="form-label" for="category_0">หมวดหมู่</label>
+            <input class="form-input input-category" id="category_0" type="text" placeholder="เช่น บุคคล, อาหาร, คำกริยา" autocomplete="off">
+          </div>
+          <div class="form-field">
+            <label class="form-label" for="difficulty_0">ระดับความยาก</label>
+            <select class="form-input input-difficulty" id="difficulty_0">
+              <option value="1">⭐ ระดับ 1 (ง่าย)</option>
+              <option value="2">⭐⭐ ระดับ 2 (ปานกลาง)</option>
+              <option value="3">⭐⭐⭐ ระดับ 3 (ท้าทาย)</option>
+            </select>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <button class="btn btn-add-vocab" id="addVocabBtn" type="button">＋ เพิ่มคำศัพท์อีกคำ</button>
+
+    <!-- ===== ปุ่มหลัก ===== -->
+    <div class="form-actions">
+      <button class="btn btn-primary" id="saveChapterBtn" type="button">✅ บันทึกและสร้างบท</button>
+      <button class="btn btn-secondary" id="cancelBtn" type="button">ยกเลิก</button>
+    </div>
+
+  </main>
+
+  <script src="data/vocab-data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

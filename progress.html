@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ความคืบหน้า — จำศัพท์จีน</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <main class="page" id="page-progress">
+
+    <header class="greeting">
+      <div class="greeting-top-bar">
+        <div class="greeting-badge">📊 สถิติการเรียนรู้</div>
+        <button class="btn-help-guide" id="btnPageHelp" type="button" aria-label="แนะนำการใช้งานหน้านี้" title="แนะนำการใช้งานหน้านี้">💡 วิธีใช้งาน</button>
+      </div>
+      <h1>ความคืบหน้า 🌸</h1>
+      <p class="greeting-sub">ภาพรวมการเรียนรู้และสถิติความจำอย่างเป็นระบบ</p>
+    </header>
+
+    <!-- Streak Hero Card -->
+    <section class="streak-hero-card" id="streakHeroCard">
+      <div class="streak-hero-top">
+        <div class="streak-hero-left">
+          <div class="streak-hero-emoji">🔥</div>
+          <div>
+            <div class="streak-hero-count" id="streakHeroCount">0 วัน</div>
+            <div class="streak-hero-sub" id="streakHeroSub">กำลังโหลดข้อมูล...</div>
+          </div>
+        </div>
+        <div class="streak-best-pill" id="streakBestPill">สถิติสูงสุด: 0 วัน</div>
+      </div>
+      <div class="streak-week-row" id="streakWeekRow">
+        <!-- สร้าง 7 วันล่าสุดผ่าน JavaScript -->
+      </div>
+    </section>
+
+    <!-- 🏆 Streak Milestone Rewards in Progress Summary (7-Day & 30-Day Digital Badges & Confetti Animation) -->
+    <section class="card streak-rewards-card" id="streakRewardsSummaryCard">
+      <div class="streak-rewards-head">
+        <div class="streak-rewards-title-group">
+          <span class="streak-rewards-icon">🏆</span>
+          <div>
+            <div class="card-label" style="margin-bottom: 2px;">รางวัลความต่อเนื่อง (Streak Rewards)</div>
+            <div class="streak-rewards-title">เหรียญเกียรติยศ Streak 7 วัน & 30 วัน ✨</div>
+          </div>
+        </div>
+        <div class="streak-rewards-badge" id="streakRewardsUnlockedCount">ปลดล็อก 0 / 2</div>
+      </div>
+      <p class="streak-rewards-sub">
+        ฝึกคำศัพท์ต่อเนื่องเพื่อปลดล็อกเหรียญตราพิเศษ พร้อมเอฟเฟกต์พลุฉลอง Confetti และเสียงดนตรีสดใส 🌸
+      </p>
+
+      <div class="streak-rewards-grid" id="streakRewardsGrid">
+        <!-- 7-Day Streak Digital Badge Card -->
+        <div class="streak-reward-item" id="rewardItem7Days">
+          <div class="streak-reward-emblem-wrap">
+            <div class="streak-reward-emblem" id="rewardEmblem7Days">⚡</div>
+            <div class="streak-reward-sparkles">✨</div>
+          </div>
+          <div class="streak-reward-content">
+            <div class="streak-reward-badge-status" id="rewardStatus7Days">🔒 ล็อกอยู่</div>
+            <div class="streak-reward-name">⚡ มุ่งมั่น 7 วันติด (Week Warrior)</div>
+            <div class="streak-reward-desc">เรียนหรือทบทวนศัพท์ต่อเนื่องครบ 1 สัปดาห์เต็ม</div>
+            <div class="streak-reward-prog-bar">
+              <div class="streak-reward-prog-fill" id="rewardProgFill7Days" style="width: 0%;"></div>
+            </div>
+            <div class="streak-reward-footer">
+              <span class="streak-reward-days-count" id="rewardDaysCount7Days">0 / 7 วัน</span>
+              <button type="button" class="streak-reward-btn" id="rewardBtn7Days">
+                🎉 แตะฉลอง
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- 30-Day Streak Digital Badge Card -->
+        <div class="streak-reward-item" id="rewardItem30Days">
+          <div class="streak-reward-emblem-wrap">
+            <div class="streak-reward-emblem" id="rewardEmblem30Days">👑</div>
+            <div class="streak-reward-sparkles">🌟</div>
+          </div>
+          <div class="streak-reward-content">
+            <div class="streak-reward-badge-status" id="rewardStatus30Days">🔒 ล็อกอยู่</div>
+            <div class="streak-reward-name">👑 ปรมาจารย์ 30 วัน (Monthly Legend)</div>
+            <div class="streak-reward-desc">สร้างวินัยจำศัพท์ระดับตำนานครบ 30 วันเต็ม</div>
+            <div class="streak-reward-prog-bar">
+              <div class="streak-reward-prog-fill" id="rewardProgFill30Days" style="width: 0%;"></div>
+            </div>
+            <div class="streak-reward-footer">
+              <span class="streak-reward-days-count" id="rewardDaysCount30Days">0 / 30 วัน</span>
+              <button type="button" class="streak-reward-btn" id="rewardBtn30Days">
+                🎊 แตะฉลอง
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 🔔 Daily Reminder Setting Card in Progress -->
+    <section class="card" id="progressReminderCard" style="display: flex; align-items: center; justify-content: space-between; gap: 12px; background: linear-gradient(135deg, #FFF8FA 0%, #FFF2F6 100%); border: 1.5px solid #FFD9E8;">
+      <div style="display: flex; align-items: center; gap: 12px;">
+        <span style="font-size: 26px;">🔔</span>
+        <div>
+          <div class="card-label" style="color: #D9385C; margin-bottom: 2px;">การแจ้งเตือนเตือนใจรายวัน</div>
+          <div style="font-size: 14px; font-weight: 800; color: var(--text-dark);" id="progressReminderSummaryText">เตือนเวลา 20:00 น. หากยังไม่ครบเป้าหมาย</div>
+        </div>
+      </div>
+      <button class="btn btn-secondary" style="width: auto; min-height: 40px; padding: 0 14px; font-size: 13px;" id="progressOpenReminderBtn" type="button">
+        ⚙️ ตั้งเวลา
+      </button>
+    </section>
+
+    <!-- TASK 7.2: Streak Milestones & Badges Card -->
+    <section class="card" id="milestonesCard">
+      <div class="card-label">🏆 รางวัลความต่อเนื่อง & ความสำเร็จ</div>
+      <div class="milestones-grid" id="milestonesGrid">
+        <!-- สร้างเหรียญรางวัลผ่าน JavaScript -->
+      </div>
+    </section>
+
+    <!-- Overall Vocabulary Progress Card -->
+    <section class="card card-learning" id="overallProgressCard">
+      <div class="card-label">ภาพรวมคำศัพท์ทั้งหมด</div>
+      <div class="learning-head">
+        <h2 id="overallMasteredPercent">0%</h2>
+        <span class="learning-count" id="overallTotalCount">0 คำ</span>
+      </div>
+      <div class="progress-bar">
+        <div class="progress-fill" id="overallProgressFill" style="width: 0%"></div>
+      </div>
+      <div class="stat-grid stat-grid-4">
+        <div class="stat-tile is-clickable" id="statMasteredTile" title="ดูคำศัพท์ที่จำได้แล้ว">
+          <div class="stat-tile-val" style="color: #237346;" id="statMasteredCount">0</div>
+          <div class="stat-tile-lbl">✅ จำได้แล้ว</div>
+        </div>
+        <div class="stat-tile is-clickable" id="statLearningTile" title="ดูคำศัพท์ที่กำลังเรียน">
+          <div class="stat-tile-val" style="color: #B45309;" id="statLearningCount">0</div>
+          <div class="stat-tile-lbl">🟡 กำลังเรียน</div>
+        </div>
+        <div class="stat-tile is-clickable" id="statNewTile" title="ดูคำศัพท์ที่ยังไม่เริ่ม">
+          <div class="stat-tile-val" style="color: var(--text-muted);" id="statNewCount">0</div>
+          <div class="stat-tile-lbl">⚪ ยังไม่เริ่ม</div>
+        </div>
+        <div class="stat-tile is-clickable" id="statDueTile" title="ดูคำศัพท์ที่ถึงกำหนดทบทวน">
+          <div class="stat-tile-val" style="color: #DC2626;" id="statDueCount">0</div>
+          <div class="stat-tile-lbl">🔴 ต้องทบทวน</div>
+        </div>
+      </div>
+      <p class="stat-interactive-hint">👆 แตะที่สถานะด้านบนหรือระดับ SRS เพื่อดูคำศัพท์</p>
+    </section>
+
+    <!-- Spaced Repetition (SRS) Level Breakdown -->
+    <section class="card" id="srsBreakdownCard">
+      <div class="card-label">ระดับความจำระยะยาว (Spaced Repetition)</div>
+      <div class="srs-level-list" id="srsLevelList">
+        <!-- สร้างรายการ SRS 5 ระดับ + ยังไม่ประเมิน ผ่าน JS -->
+      </div>
+    </section>
+
+    <!-- TASK 7.2: Interactive Vocabulary Drill-Down Section -->
+    <section class="card" id="drillDownCard">
+      <div class="card-label" id="drillDownHeaderLabel">🔍 รายการคำศัพท์ (Drill-Down)</div>
+      
+      <!-- Filter Chips -->
+      <div class="filter-chips-row" id="drillDownFilters">
+        <!-- สร้างปุ่มกรองผ่าน JS -->
+      </div>
+
+      <!-- Quick Search Bar -->
+      <div class="drilldown-search-wrap">
+        <input type="search" id="drillDownSearch" class="drilldown-search-input" placeholder="🔍 ค้นหาคำศัพท์, พินอิน หรือคำแปล..." autocomplete="off">
+      </div>
+
+      <!-- Result Summary -->
+      <div class="drilldown-summary-row" id="drillDownSummary">
+        <span id="drillDownCountText">กำลังโหลดคำศัพท์...</span>
+        <button type="button" class="btn-text-link" id="drillDownResetBtn" style="display: none;">ล้างตัวกรอง</button>
+      </div>
+
+      <!-- Words List -->
+      <div class="drilldown-list" id="drillDownList">
+        <!-- สร้างรายการคำศัพท์ผ่าน JS -->
+      </div>
+    </section>
+
+    <!-- Chapter Progress Breakdown -->
+    <section class="card" id="chaptersProgressCard">
+      <div class="card-label">ความคืบหน้าตามบทเรียน</div>
+      <div class="progress-chapter-list" id="progressChapterList">
+        <!-- สร้างรายการบทเรียนพร้อม Progress Bar ผ่าน JS -->
+      </div>
+    </section>
+
+    <!-- Quick Action Buttons -->
+    <div style="display: flex; gap: var(--space-3); margin-top: var(--space-2); margin-bottom: var(--space-4);">
+      <button class="btn btn-secondary" type="button" style="flex: 1;" onclick="location.href='quick-review.html'">🧠 ทบทวนวันนี้</button>
+      <button class="btn btn-primary" type="button" style="flex: 1;" onclick="location.href='chapters.html'">📚 ไปที่บทเรียน</button>
+    </div>
+
+    <!-- Modal: ตั้งค่าการแจ้งเตือนเตือนใจรายวัน (Daily Notification Reminder) -->
+    <div class="modal-backdrop" id="reminderModal" style="display: none;" role="dialog" aria-modal="true" aria-labelledby="reminderModalTitle">
+      <div class="modal-content reminder-modal-content">
+        <div class="modal-head">
+          <div class="modal-title" id="reminderModalTitle">🔔 ตั้งค่าแจ้งเตือนเตือนใจรายวัน</div>
+          <button type="button" class="modal-close-btn" id="reminderModalCloseBtn" aria-label="ปิด">✕</button>
+        </div>
+        <p class="reminder-modal-sub">
+          ระบบจะแจ้งเตือนให้เข้ามาฝึกคำศัพท์ หากในวันนั้นคุณยังไม่พิชิตเป้าหมายประจำวัน 🌸
+        </p>
+
+        <!-- Toggle Switch: เปิด/ปิดการแจ้งเตือน -->
+        <div class="reminder-setting-item">
+          <div class="reminder-setting-label-group">
+            <span class="reminder-setting-icon">⏰</span>
+            <div>
+              <div class="reminder-setting-title">เปิดการแจ้งเตือนเตือนใจ</div>
+              <div class="reminder-setting-sub">เตือนเฉพาะวันที่ยังไม่ครบเป้าหมาย</div>
+            </div>
+          </div>
+          <label class="toggle-switch">
+            <input type="checkbox" id="reminderToggleSwitch" checked>
+            <span class="toggle-slider"></span>
+          </label>
+        </div>
+
+        <div id="reminderConfigBody" style="display: flex; flex-direction: column; gap: 14px;">
+          <!-- Time Selection Presets -->
+          <div style="display: flex; flex-direction: column; gap: 8px;">
+            <label style="font-size: 13px; font-weight: 700; color: var(--text-dark);">เลือกเวลาที่สะดวกเตือน:</label>
+            <div class="reminder-presets-grid" id="reminderPresetsGrid">
+              <button type="button" class="reminder-preset-chip" data-time="08:30">🌅 08:30 ตอนเช้า</button>
+              <button type="button" class="reminder-preset-chip" data-time="12:30">🍱 12:30 พักเที่ยง</button>
+              <button type="button" class="reminder-preset-chip" data-time="18:00">☕ 18:00 ตอนเย็น</button>
+              <button type="button" class="reminder-preset-chip is-selected" data-time="20:00">🌙 20:00 หัวค่ำ (แนะนำ)</button>
+              <button type="button" class="reminder-preset-chip" data-time="21:30">✨ 21:30 ก่อนนอน</button>
+            </div>
+          </div>
+
+          <!-- Custom Time Input -->
+          <div style="display: flex; flex-direction: column; gap: 8px;">
+            <label for="reminderCustomTime" style="font-size: 13px; font-weight: 700; color: var(--text-dark);">หรือระบุเวลาเอง (24 ชั่วโมง):</label>
+            <div class="reminder-time-input-wrap">
+              <input type="time" id="reminderCustomTime" class="reminder-time-input" value="20:00">
+              <span class="reminder-time-hint">น.</span>
+            </div>
+          </div>
+
+          <!-- Live Reminder Preview Box -->
+          <div class="reminder-preview-box">
+            <div class="reminder-preview-header">
+              <span class="reminder-preview-badge">ตัวอย่างข้อความเตือนใจ</span>
+              <span class="reminder-preview-time" id="reminderPreviewTime">20:00 น.</span>
+            </div>
+            <div class="reminder-preview-body" id="reminderPreviewText">
+              🔔 จำศัพท์จีน: วันนี้คุณเรียนไปแล้ว 0/10 คำ ยังเหลืออีก 10 คำจะพิชิตเป้าหมาย มาฝึกต่อกันเถอะนะ 🌸
+            </div>
+          </div>
+
+          <!-- Browser Notification Permission Status & Button -->
+          <div class="reminder-browser-perm-box" id="reminderBrowserPermBox">
+            <div style="display: flex; align-items: center; justify-content: space-between; gap: 10px;">
+              <div style="display: flex; align-items: center; gap: 8px;">
+                <span style="font-size: 18px;">🌐</span>
+                <div>
+                  <div style="font-size: 13px; font-weight: 700; color: var(--text-dark);">การแจ้งเตือนเบราว์เซอร์</div>
+                  <div style="font-size: 11.5px; color: var(--text-muted);" id="reminderPermStatusText">พร้อมส่งแจ้งเตือนในระบบ</div>
+                </div>
+              </div>
+              <button type="button" class="btn-text-pill" id="reminderReqPermBtn">
+                ขอสิทธิ์เบราว์เซอร์
+              </button>
+            </div>
+          </div>
+
+          <!-- Test Notification Button -->
+          <button type="button" class="btn btn-secondary reminder-test-btn" id="reminderTestBtn">
+            🔔 ทดสอบการแจ้งเตือนทันที
+          </button>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" id="reminderModalCancelBtn">ยกเลิก</button>
+          <button type="button" class="btn btn-primary" id="reminderModalSaveBtn">บันทึกการตั้งค่า ✨</button>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <nav class="bottom-nav">
+    <button class="nav-item" onclick="location.href='index.html'">🏠<span>หน้าแรก</span></button>
+    <button class="nav-item" onclick="location.href='chapters.html'">📚<span>บทเรียน</span></button>
+    <button class="nav-item" onclick="location.href='quick-review.html'">🧠<span>ทบทวน</span></button>
+    <button class="nav-item active" onclick="location.href='progress.html'" aria-current="page">📊<span>ความคืบหน้า</span></button>
+  </nav>
+
+  <script src="data/vocab-data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

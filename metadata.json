@@ -1,0 +1,8 @@
+{
+  "name": "จำศัพท์จีน - Chinese Vocabulary Memory App",
+  "description": "เว็บแอปสำหรับช่วยจำคำศัพท์ภาษาจีน Personal Chinese Vocabulary Memory Trainer",
+  "capabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ],
+  "permissions": []
+}

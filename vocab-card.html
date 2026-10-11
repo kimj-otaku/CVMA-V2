@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vocabulary Card — จำศัพท์จีน</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <main class="page" id="page-vocab-card">
+
+    <header class="card-page-header">
+      <button class="icon-btn" aria-label="ย้อนกลับไปหน้าบทเรียน" onclick="location.href='chapters.html'">←</button>
+      <div class="card-page-title">
+        <span class="chapter-title">第1课</span>
+        <span class="chapter-sub">คำที่ 3 / 20</span>
+      </div>
+      <div class="icon-spacer"></div>
+    </header>
+
+    <div class="learn-progress">
+      <div class="progress-bar"><div class="progress-fill" style="width:15%"></div></div>
+    </div>
+
+    <!-- ===== Vocabulary Card (สถานะ: ด้านหน้า - ยังไม่เปิดคำตอบ) ===== -->
+    <section class="vocab-card" id="vocabCard">
+
+      <div class="vocab-card-top">
+        <span class="tag">人物</span>
+        <span class="difficulty" aria-label="ระดับความยาก">
+          <span class="dot dot-filled"></span>
+          <span class="dot"></span>
+          <span class="dot"></span>
+        </span>
+      </div>
+
+      <div class="vocab-card-face vocab-card-front">
+        <div class="vocab-hanzi">老师</div>
+        <div class="vocab-pinyin">lǎoshī</div>
+
+        <!-- 🔊 Text-to-Speech Pronunciation Button (Front) -->
+        <button class="learn-listen-btn" id="vocabCardListenBtnFront" aria-label="ฟังเสียงออกเสียงภาษาจีน" type="button">
+          🔊 ฟังเสียง
+        </button>
+
+        <div class="recall-hint">🤔 ลองนึกความหมายในใจก่อนนะ</div>
+
+        <button class="btn btn-primary vocab-reveal-btn" onclick="document.getElementById('vocabCard').classList.add('is-revealed')">
+          👁️ แตะเพื่อดูคำตอบ
+        </button>
+      </div>
+
+      <div class="vocab-card-face vocab-card-back">
+        <div class="vocab-hanzi vocab-hanzi-sm">老师</div>
+        <div class="vocab-pinyin">lǎoshī</div>
+
+        <!-- 🔊 Text-to-Speech Pronunciation Button (Back) -->
+        <button class="learn-listen-btn" id="vocabCardListenBtnBack" aria-label="ฟังเสียงออกเสียงภาษาจีน" type="button" style="margin: 6px auto 12px;">
+          🔊 ฟังเสียง
+        </button>
+
+        <div class="vocab-meaning">ครู</div>
+
+        <div class="vocab-divider"></div>
+
+        <div class="vocab-example">
+          <div style="display: flex; align-items: center; justify-content: space-between; gap: 8px;">
+            <div class="vocab-example-hanzi" style="margin-bottom: 0;">老师教我们中文。</div>
+            <button class="btn-mini-audio" id="vocabCardExampleListenBtn" type="button" title="ฟังเสียงประโยคตัวอย่าง">🔊</button>
+          </div>
+          <div class="vocab-example-th">ครูสอนภาษาจีนให้เรา</div>
+        </div>
+
+        <div class="vocab-tip">
+          💡 <span>老 + 师 → 老师 = ครู</span>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- ===== Spaced Repetition — 5 ระดับ (แสดงเมื่อเปิดคำตอบแล้ว) ===== -->
+    <div class="srs-rating" id="srsRating">
+      <div class="srs-label">คุณจำคำนี้ได้แค่ไหน?</div>
+      <div class="srs-buttons">
+        <button class="srs-btn srs-1"><span class="srs-emoji">😵</span>ลืมแล้ว</button>
+        <button class="srs-btn srs-2"><span class="srs-emoji">😕</span>ยาก</button>
+        <button class="srs-btn srs-3"><span class="srs-emoji">🙂</span>ปานกลาง</button>
+        <button class="srs-btn srs-4"><span class="srs-emoji">😄</span>ง่าย</button>
+        <button class="srs-btn srs-5"><span class="srs-emoji">🤩</span>จำแม่น</button>
+      </div>
+    </div>
+
+  </main>
+
+  <script src="data/vocab-data.js"></script>
+  <script src="app.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      function playVoice(text, btn) {
+        if (!text) return;
+        if (btn) {
+          btn.classList.add("is-playing");
+          if (btn.classList.contains("learn-listen-btn")) btn.textContent = "🔊 กำลังเล่น...";
+        }
+        if (window.speakChinese) {
+          window.speakChinese(text, {
+            onEnd: function () {
+              if (btn) {
+                btn.classList.remove("is-playing");
+                if (btn.classList.contains("learn-listen-btn")) btn.textContent = "🔊 ฟังเสียง";
+              }
+            },
+            onError: function () {
+              if (btn) {
+                btn.classList.remove("is-playing");
+                if (btn.classList.contains("learn-listen-btn")) btn.textContent = "🔊 ฟังเสียง";
+              }
+            }
+          });
+        }
+      }
+
+      var btnF = document.getElementById("vocabCardListenBtnFront");
+      if (btnF) btnF.addEventListener("click", function () { playVoice("老师", btnF); });
+
+      var btnB = document.getElementById("vocabCardListenBtnBack");
+      if (btnB) btnB.addEventListener("click", function () { playVoice("老师", btnB); });
+
+      var btnEx = document.getElementById("vocabCardExampleListenBtn");
+      if (btnEx) btnEx.addEventListener("click", function () { playVoice("老师教我们中文。", btnEx); });
+    });
+  </script>
+</body>
+</html>

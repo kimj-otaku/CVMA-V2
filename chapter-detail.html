@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>รายละเอียดบท — จำศัพท์จีน</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <main class="page" id="page-chapter-detail">
+
+    <header class="card-page-header">
+      <button class="icon-btn" aria-label="ย้อนกลับไปหน้าบทเรียน" onclick="location.href='chapters.html'">←</button>
+      <div class="card-page-title">
+        <span class="chapter-title" id="detailTitle">บทเรียน</span>
+        <span class="chapter-sub" id="detailSub"></span>
+      </div>
+      <button class="btn-help-guide btn-help-header" id="btnPageHelp" type="button" aria-label="แนะนำการใช้งานหน้านี้" title="แนะนำการใช้งานหน้านี้">💡 วิธีใช้</button>
+    </header>
+
+    <!-- เนื้อหาถูกสร้างจาก VOCAB_DATA ตาม Chapter ID (?id=...) ผ่าน app.js (TASK 4.2) -->
+    <div id="chapterDetail"></div>
+
+    <!-- Modal: เพิ่มคำศัพท์ใหม่ในบทนี้ -->
+    <div class="modal-backdrop" id="addWordModal" style="display: none;" role="dialog" aria-modal="true" aria-labelledby="addWordModalTitle">
+      <div class="modal-content" style="max-width: 440px;">
+        <div class="modal-head">
+          <div class="modal-title" id="addWordModalTitle">➕ เพิ่มคำศัพท์ใหม่</div>
+          <button type="button" class="modal-close-btn" id="addWordModalCloseBtn" aria-label="ปิด">✕</button>
+        </div>
+        <p style="font-size: 13.5px; color: var(--text-muted); margin: 0;">
+          เพิ่มคำศัพท์ใหม่ลงในบทเรียน พร้อมตัวอักษรจีน พินอิน และความหมาย
+        </p>
+
+        <form id="addWordForm" onsubmit="return false;" style="display: flex; flex-direction: column; gap: 12px; margin-top: 8px;">
+          <div class="form-field">
+            <label class="form-label" for="addWordHanzi">汉字 (ตัวอักษรจีน) <span class="required-star">*</span></label>
+            <div class="hanzi-input-group">
+              <input class="form-input form-input-hanzi" id="addWordHanzi" type="text" placeholder="เช่น 咖啡 หรือ 朋友" autocomplete="off" required>
+              <button class="btn-preview-speech" id="addWordPreviewSpeechBtn" type="button" title="ทดสอบออกเสียงภาษาจีน">🔊 ฟังเสียง</button>
+            </div>
+          </div>
+
+          <div class="form-field">
+            <label class="form-label" for="addWordPinyin">Pinyin (พินอิน)</label>
+            <input class="form-input" id="addWordPinyin" type="text" placeholder="เช่น kāfēi หรือ péngyou" autocomplete="off">
+          </div>
+
+          <div class="form-field">
+            <label class="form-label" for="addWordMeaning">ความหมายภาษาไทย <span class="required-star">*</span></label>
+            <input class="form-input" id="addWordMeaning" type="text" placeholder="เช่น กาแฟ หรือ เพื่อน" autocomplete="off" required>
+          </div>
+
+          <div class="form-field">
+            <label class="form-label" for="addWordExample">ตัวอย่างประโยคภาษาจีน (ไม่บังคับ)</label>
+            <input class="form-input" id="addWordExample" type="text" placeholder="เช่น 我想喝咖啡。" autocomplete="off">
+          </div>
+
+          <div class="form-field">
+            <label class="form-label" for="addWordExampleTh">คำแปลประโยคตัวอย่าง (ไม่บังคับ)</label>
+            <input class="form-input" id="addWordExampleTh" type="text" placeholder="เช่น ฉันอยากดื่มกาแฟ" autocomplete="off">
+          </div>
+
+          <div class="form-field">
+            <label class="form-label" for="addWordTip">เทคนิคช่วยจำ (ไม่บังคับ)</label>
+            <input class="form-input" id="addWordTip" type="text" placeholder="เช่น 口 (ปาก) + 咖 + 啡" autocomplete="off">
+          </div>
+
+          <div class="form-field">
+            <label class="form-label" for="addWordCategory">หมวดหมู่ (ไม่บังคับ)</label>
+            <input class="form-input" id="addWordCategory" type="text" placeholder="เช่น เครื่องดื่ม, ทั่วไป" autocomplete="off">
+          </div>
+
+          <div class="modal-footer" style="margin-top: 6px;">
+            <button type="button" class="btn btn-secondary" id="addWordCancelBtn">ยกเลิก</button>
+            <button type="button" class="btn btn-primary" id="addWordSubmitBtn">✨ บันทึกคำศัพท์</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+  </main>
+
+  <nav class="bottom-nav">
+    <button class="nav-item" onclick="location.href='index.html'">🏠<span>หน้าแรก</span></button>
+    <button class="nav-item active" onclick="location.href='chapters.html'" aria-current="page">📚<span>บทเรียน</span></button>
+    <button class="nav-item" onclick="location.href='quick-review.html'">🧠<span>ทบทวน</span></button>
+    <button class="nav-item" onclick="location.href='progress.html'">📊<span>ความคืบหน้า</span></button>
+  </nav>
+
+  <script src="data/vocab-data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

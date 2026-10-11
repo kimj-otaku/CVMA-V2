@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>จำศัพท์จีน - Chinese Vocabulary Memory App</title>
+<meta name="description" content="เว็บแอปสำหรับช่วยจำคำศัพท์ภาษาจีน Personal Chinese Vocabulary Memory Trainer">
+<meta property="og:title" content="จำศัพท์จีน - Chinese Vocabulary Memory App">
+<meta property="og:description" content="เว็บแอปสำหรับช่วยจำคำศัพท์ภาษาจีน Personal Chinese Vocabulary Memory Trainer">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <main class="page" id="page-home">
+
+    <header class="greeting">
+      <div class="greeting-top-bar">
+        <div class="greeting-badge">🌸 เก่งภาษาจีนวันละนิด</div>
+        <button class="btn-help-guide" id="btnPageHelp" type="button" aria-label="แนะนำการใช้งานหน้านี้" title="แนะนำการใช้งานหน้านี้">💡 วิธีใช้งาน</button>
+      </div>
+      <h1>你好! มาฝึกกันนะ ✨</h1>
+      <p>สะสมคำศัพท์ทีละก้าว จำแม่นด้วยระบบทบทวนอัจฉริยะ</p>
+    </header>
+
+    <!-- 🔔 Daily Goal Reminder Alert Banner (Shown when goal is not met at/after reminder time) -->
+    <div class="reminder-alert-banner" id="homeReminderAlertBanner" style="display: none;">
+      <div class="reminder-alert-icon">🔔</div>
+      <div class="reminder-alert-content">
+        <div class="reminder-alert-title" id="homeReminderAlertTitle">เตือนความจำประจำวัน 🌸</div>
+        <div class="reminder-alert-desc" id="homeReminderAlertDesc">วันนี้คุณยังไม่ได้ครบเป้าหมายคำศัพท์นะ มาเรียนต่อกันเถอะ!</div>
+        <div class="reminder-alert-actions">
+          <button class="reminder-alert-btn-action" id="homeReminderActionBtn" type="button">✨ ไปฝึกคำศัพท์เลย</button>
+          <button class="reminder-alert-btn-setting" id="homeReminderSettingBtn" type="button">⚙️ ปรับเวลา</button>
+          <button class="reminder-alert-btn-dismiss" id="homeReminderDismissBtn" type="button" aria-label="ปิดการแจ้งเตือน">✕ ปิด</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- 🎯 Daily Vocabulary Learning Goal Card -->
+    <section class="card card-daily-goal" id="homeDailyGoalCard">
+      <div class="goal-card-top">
+        <div class="goal-card-title-group">
+          <span class="goal-card-icon">🎯</span>
+          <div>
+            <div class="card-label" style="margin-bottom: 2px;">เป้าหมายประจำวัน</div>
+            <div class="goal-card-title">ฝึกจำศัพท์วันนี้</div>
+          </div>
+        </div>
+        <button class="goal-setting-btn" id="homeGoalEditBtn" type="button" aria-label="ปรับเปลี่ยนเป้าหมาย">
+          ⚙️ ปรับเป้าหมาย
+        </button>
+      </div>
+
+      <div class="goal-stats-row">
+        <div class="goal-numbers">
+          <span class="goal-number-current" id="homeGoalCurrentCount">0</span>
+          <span class="goal-number-sep">/</span>
+          <span class="goal-number-target" id="homeGoalTargetCount">10</span>
+          <span class="goal-number-unit">คำ</span>
+        </div>
+        <div class="goal-badge" id="homeGoalPercentBadge">0%</div>
+      </div>
+
+      <div class="progress-bar goal-progress-bar">
+        <div class="progress-fill goal-progress-fill" id="homeGoalProgressFill" style="width: 0%"></div>
+      </div>
+
+      <div class="goal-status-row">
+        <span class="goal-status-text" id="homeGoalMessage">🌸 มาเริ่มต้นเรียนคำศัพท์วันนี้กันเถอะ</span>
+        <button class="goal-celebrate-btn" id="homeGoalCelebrateBtn" type="button" style="display: none;">
+          🎊 ฉลองเป้าหมาย!
+        </button>
+      </div>
+
+      <!-- Quick Preset Chips for rapid selection right on card -->
+      <div class="goal-quick-chips" id="homeGoalQuickChips">
+        <span class="goal-quick-label">เป้าหมายด่วน:</span>
+        <button type="button" class="goal-chip" data-goal="5">5 คำ</button>
+        <button type="button" class="goal-chip" data-goal="10">10 คำ</button>
+        <button type="button" class="goal-chip" data-goal="15">15 คำ</button>
+        <button type="button" class="goal-chip" data-goal="20">20 คำ</button>
+      </div>
+
+      <!-- Daily Reminder Quick Status & Setting Row -->
+      <div class="goal-reminder-row" id="homeGoalReminderRow">
+        <div class="goal-reminder-info" id="homeGoalReminderInfo">
+          <span class="goal-reminder-icon">🔔</span>
+          <span class="goal-reminder-text" id="homeGoalReminderText">เตือนความจำ: 20:00 น. (เปิดใช้งาน)</span>
+        </div>
+        <button class="btn-text-pill" id="homeOpenReminderBtn" type="button" aria-label="ตั้งเวลาแจ้งเตือนรายวัน">
+          ⚙️ ตั้งเวลาเตือน
+        </button>
+      </div>
+    </section>
+
+    <!-- 📈 7-Day Vocabulary Learning Streak Chart (Powered by D3.js) -->
+    <section class="card card-streak-chart" id="homeStreakChartCard">
+      <div class="streak-chart-header">
+        <div class="streak-chart-title-group">
+          <span class="streak-chart-icon">📈</span>
+          <div>
+            <div class="card-label" style="margin-bottom: 2px;">สถิติการเรียนรู้ 7 วันล่าสุด</div>
+            <div class="streak-chart-title">กราฟความต่อเนื่อง (Streak Activity)</div>
+          </div>
+        </div>
+        <div class="streak-chart-badge" id="homeStreakChartBadge">🔥 0 วัน</div>
+      </div>
+
+      <!-- D3 Chart Canvas Container -->
+      <div class="streak-chart-wrap">
+        <div class="streak-chart-container" id="homeStreakChartD3"></div>
+        <div class="streak-chart-tooltip" id="homeStreakChartTooltip" style="display: none;"></div>
+      </div>
+
+      <!-- Quick 7-Day Summary Stats -->
+      <div class="streak-chart-summary" id="homeStreakChartSummary">
+        <div class="streak-summary-item">
+          <span class="streak-summary-val" id="streakSummaryTotalWords">0 คำ</span>
+          <span class="streak-summary-lbl">รวม 7 วัน</span>
+        </div>
+        <div class="streak-summary-sep"></div>
+        <div class="streak-summary-item">
+          <span class="streak-summary-val" id="streakSummaryActiveDays">0 / 7 วัน</span>
+          <span class="streak-summary-lbl">วันที่ฝึก</span>
+        </div>
+        <div class="streak-summary-sep"></div>
+        <div class="streak-summary-item">
+          <span class="streak-summary-val" id="streakSummaryAvgWords">0 คำ</span>
+          <span class="streak-summary-lbl">เฉลี่ยต่อวัน</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Modal: ปรับเป้าหมายประจำวัน -->
+    <div class="modal-backdrop" id="goalModal" style="display: none;" role="dialog" aria-modal="true" aria-labelledby="goalModalTitle">
+      <div class="modal-content goal-modal-content">
+        <div class="modal-head">
+          <div class="modal-title" id="goalModalTitle">🎯 ตั้งเป้าหมายคำศัพท์ประจำวัน</div>
+          <button type="button" class="modal-close-btn" id="goalModalCloseBtn" aria-label="ปิด">✕</button>
+        </div>
+        <p style="font-size: 13.5px; color: var(--text-muted); margin: 0; line-height: 1.5;">
+          กำหนดจำนวนคำศัพท์ภาษาจีนที่อยากเรียนรู้หรือทบทวนในแต่ละวัน เพื่อสร้างวินัยและจดจำคำศัพท์อย่างต่อเนื่อง 🌸
+        </p>
+
+        <div style="display: flex; flex-direction: column; gap: 8px;">
+          <label style="font-size: 13px; font-weight: 700; color: var(--text-dark);">เลือกจำนวนคำแนะนำ:</label>
+          <div class="goal-modal-presets" id="goalModalPresets">
+            <button type="button" class="goal-modal-preset-btn" data-val="5">🌱 5 คำ / วัน</button>
+            <button type="button" class="goal-modal-preset-btn is-selected" data-val="10">🌸 10 คำ / วัน (แนะนำ)</button>
+            <button type="button" class="goal-modal-preset-btn" data-val="15">⭐ 15 คำ / วัน</button>
+            <button type="button" class="goal-modal-preset-btn" data-val="20">🔥 20 คำ / วัน</button>
+            <button type="button" class="goal-modal-preset-btn" data-val="30">👑 30 คำ / วัน</button>
+          </div>
+        </div>
+
+        <div style="display: flex; flex-direction: column; gap: 8px;">
+          <label for="goalCustomInput" style="font-size: 13px; font-weight: 700; color: var(--text-dark);">หรือระบุจำนวนเอง (คำต่อวัน):</label>
+          <div style="position: relative;">
+            <input type="number" id="goalCustomInput" min="1" max="100" class="input-text" placeholder="เช่น 12" style="font-size: 17px; font-weight: 700; padding-right: 50px; width: 100%;">
+            <span style="position: absolute; right: 16px; top: 50%; transform: translateY(-50%); color: var(--text-muted); font-size: 14px; font-weight: 700; pointer-events: none;">คำ</span>
+          </div>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" id="goalModalCancelBtn">ยกเลิก</button>
+          <button type="button" class="btn btn-primary" id="goalModalSaveBtn">บันทึกเป้าหมาย ✨</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal: ตั้งค่าการแจ้งเตือนเตือนใจรายวัน (Daily Notification Reminder) -->
+    <div class="modal-backdrop" id="reminderModal" style="display: none;" role="dialog" aria-modal="true" aria-labelledby="reminderModalTitle">
+      <div class="modal-content reminder-modal-content">
+        <div class="modal-head">
+          <div class="modal-title" id="reminderModalTitle">🔔 ตั้งค่าแจ้งเตือนเตือนใจรายวัน</div>
+          <button type="button" class="modal-close-btn" id="reminderModalCloseBtn" aria-label="ปิด">✕</button>
+        </div>
+        <p class="reminder-modal-sub">
+          ระบบจะแจ้งเตือนให้เข้ามาฝึกคำศัพท์ หากในวันนั้นคุณยังไม่พิชิตเป้าหมายประจำวัน 🌸
+        </p>
+
+        <!-- Toggle Switch: เปิด/ปิดการแจ้งเตือน -->
+        <div class="reminder-setting-item">
+          <div class="reminder-setting-label-group">
+            <span class="reminder-setting-icon">⏰</span>
+            <div>
+              <div class="reminder-setting-title">เปิดการแจ้งเตือนเตือนใจ</div>
+              <div class="reminder-setting-sub">เตือนเฉพาะวันที่ยังไม่ครบเป้าหมาย</div>
+            </div>
+          </div>
+          <label class="toggle-switch">
+            <input type="checkbox" id="reminderToggleSwitch" checked>
+            <span class="toggle-slider"></span>
+          </label>
+        </div>
+
+        <div id="reminderConfigBody" style="display: flex; flex-direction: column; gap: 14px;">
+          <!-- Time Selection Presets -->
+          <div style="display: flex; flex-direction: column; gap: 8px;">
+            <label style="font-size: 13px; font-weight: 700; color: var(--text-dark);">เลือกเวลาที่สะดวกเตือน:</label>
+            <div class="reminder-presets-grid" id="reminderPresetsGrid">
+              <button type="button" class="reminder-preset-chip" data-time="08:30">🌅 08:30 ตอนเช้า</button>
+              <button type="button" class="reminder-preset-chip" data-time="12:30">🍱 12:30 พักเที่ยง</button>
+              <button type="button" class="reminder-preset-chip" data-time="18:00">☕ 18:00 ตอนเย็น</button>
+              <button type="button" class="reminder-preset-chip is-selected" data-time="20:00">🌙 20:00 หัวค่ำ (แนะนำ)</button>
+              <button type="button" class="reminder-preset-chip" data-time="21:30">✨ 21:30 ก่อนนอน</button>
+            </div>
+          </div>
+
+          <!-- Custom Time Input -->
+          <div style="display: flex; flex-direction: column; gap: 8px;">
+            <label for="reminderCustomTime" style="font-size: 13px; font-weight: 700; color: var(--text-dark);">หรือระบุเวลาเอง (24 ชั่วโมง):</label>
+            <div class="reminder-time-input-wrap">
+              <input type="time" id="reminderCustomTime" class="reminder-time-input" value="20:00">
+              <span class="reminder-time-hint">น.</span>
+            </div>
+          </div>
+
+          <!-- Live Reminder Preview Box -->
+          <div class="reminder-preview-box">
+            <div class="reminder-preview-header">
+              <span class="reminder-preview-badge">ตัวอย่างข้อความเตือนใจ</span>
+              <span class="reminder-preview-time" id="reminderPreviewTime">20:00 น.</span>
+            </div>
+            <div class="reminder-preview-body" id="reminderPreviewText">
+              🔔 จำศัพท์จีน: วันนี้คุณเรียนไปแล้ว 0/10 คำ ยังเหลืออีก 10 คำจะพิชิตเป้าหมาย มาฝึกต่อกันเถอะนะ 🌸
+            </div>
+          </div>
+
+          <!-- Browser Notification Permission Status & Button -->
+          <div class="reminder-browser-perm-box" id="reminderBrowserPermBox">
+            <div style="display: flex; align-items: center; justify-content: space-between; gap: 10px;">
+              <div style="display: flex; align-items: center; gap: 8px;">
+                <span style="font-size: 18px;">🌐</span>
+                <div>
+                  <div style="font-size: 13px; font-weight: 700; color: var(--text-dark);">การแจ้งเตือนเบราว์เซอร์</div>
+                  <div style="font-size: 11.5px; color: var(--text-muted);" id="reminderPermStatusText">พร้อมส่งแจ้งเตือนในระบบ</div>
+                </div>
+              </div>
+              <button type="button" class="btn-text-pill" id="reminderReqPermBtn">
+                ขอสิทธิ์เบราว์เซอร์
+              </button>
+            </div>
+          </div>
+
+          <!-- Test Notification Button -->
+          <button type="button" class="btn btn-secondary reminder-test-btn" id="reminderTestBtn">
+            🔔 ทดสอบการแจ้งเตือนทันที
+          </button>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" id="reminderModalCancelBtn">ยกเลิก</button>
+          <button type="button" class="btn btn-primary" id="reminderModalSaveBtn">บันทึกการตั้งค่า ✨</button>
+        </div>
+      </div>
+    </div>
+
+    <section class="card card-current">
+      <div class="card-label">📖 บทเรียนปัจจุบัน</div>
+      <h2 class="chapter-title" id="homeCurrentChapterTitle">第1课</h2>
+      <div class="progress-text" id="homeCurrentProgressText">0 / 0 คำ</div>
+      <div class="progress-bar">
+        <div class="progress-fill" id="homeCurrentProgressFill" style="width:0%"></div>
+      </div>
+      <button class="btn btn-primary" id="homeLearnBtn" type="button">✨ เรียนต่อเลย</button>
+    </section>
+
+    <section class="card card-review">
+      <div class="card-label">⏰ ทบทวนประจำวัน</div>
+      <div class="review-counts" id="homeReviewCounts">
+        <span class="badge badge-danger">🔴 0 ยังจำไม่ได้</span>
+        <span class="badge badge-warning">🟡 0 ยังไม่เริ่ม</span>
+      </div>
+      <button class="btn btn-secondary" id="homeReviewBtn" type="button" onclick="location.href='quick-review.html'">🧠 ทบทวนความจำด่วน</button>
+    </section>
+
+    <section class="card card-quiz-entry" style="display: flex; align-items: center; justify-content: space-between; gap: 12px; background: linear-gradient(135deg, #FFF7FA 0%, #F8F3FD 100%); border: 1.5px solid #FFD9E8;">
+      <div>
+        <div class="card-label" style="color: #7B4EC9; font-weight: 800; margin-bottom: 2px;">🎯 ACTIVE RECALL</div>
+        <div style="font-weight: 800; font-size: 16px; color: var(--text-dark); margin-bottom: 2px;">แบบทดสอบทายศัพท์ 🎮</div>
+        <div style="font-size: 13px; color: var(--text-muted); font-weight: 500;">เลือกความหมาย • ฟังเสียง • สะกด Pinyin</div>
+      </div>
+      <button class="btn btn-primary" style="width: auto; min-width: 96px; min-height: 44px; padding: 0 18px; font-size: 14px;" type="button" onclick="location.href='quiz.html'">เริ่มควิซ ✨</button>
+    </section>
+
+    <div class="streak" id="homeStreakText">🔥 วันนี้ยังไม่ได้เริ่มเรียน</div>
+
+  </main>
+
+  <nav class="bottom-nav">
+    <button class="nav-item active" onclick="location.href='index.html'" aria-current="page">🏠<span>หน้าแรก</span></button>
+    <button class="nav-item" onclick="location.href='chapters.html'">📚<span>บทเรียน</span></button>
+    <button class="nav-item" onclick="location.href='quick-review.html'">🧠<span>ทบทวน</span></button>
+    <button class="nav-item" onclick="location.href='progress.html'">📊<span>ความคืบหน้า</span></button>
+  </nav>
+
+  <script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
+  <script>window.d3 || document.write('<script src="node_modules/d3/dist/d3.min.js"><\/script>')</script>
+  <script src="data/vocab-data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
